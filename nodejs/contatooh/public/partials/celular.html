@@ -1,0 +1,60 @@
+<div class="jumbotron"> 
+	<h1 class="text-center"> 
+		Bem-vindo ao Contatooh 
+	</h1> 
+</div> 
+
+<!-- Elementos com a diretiva ng-show ficam VISÍVEIS enquanto o valor for true -->
+<!-- Quando houver um erro,preenchemos o texto do objeto mensagem.Se tudo correr bem, limpamos seu valor. -->
+<!-- Usaremos a diretiva ng-show para exibir a mensagem, apenas se ela existir, pois undefined é avaliado como false em JavaScript -->
+<p ng-show="mensagem.texto"> 
+	{{mensagem.texto}} 
+</p>
+
+
+<!-- A diretiva ng-click tem como valor a chamada de uma função, em nosso caso, incrementa().  -->
+<!-- Ela se comporta da mesma maneira como se tivéssemosassociadoafunçãoaoevento onclick emJavaScript.  -->
+<!-- Seguindo a mesma lógica, existem diretivas como ng-blur, ng-mouseover etc.  -->
+<button class="btn btn-primary" ng-click="incrementa()"> 
+	Novo 
+</button> 
+
+<!-- diretiva que perminte ler e gravar em uma propriedade no escopo do controller, isto é, queremos fazer two-way databinding.-->
+<input ng-model="filtro" type="search" placeholder="parte do nome"> 
+
+<!-- Elementos com a diretiva ng-show ficam VISÍVEIS enquanto o valor for true -->
+<p ng-show="telefones.length"> 
+
+	<!-- Aprendemos que página é view e que ela pode ter uma lacuna definida através de uma  -->
+	<!-- Angular Expression (AE) caracterizada por {{ }} e tudo que estiver dentro dela precisa  -->
+	<!-- ser buscado de algum lugar,desta forma, views atuam como templates que precisam de dados fornecidos por controllers -->
+	Contatos cadastrados: {{telefones.length}}
+</p>
+ 
+<!-- Elementos com a diretiva ng-hide ficam INVISÍVEIS enquanto o valor for true -->
+<p class="text-info" ng-hide="telefones.length"> 
+	Não há contatos cadastrados 
+</p>
+
+<div class="table-responsive"> 
+	<table class="table table-hover"> 
+		<tr> 
+			<th>CELULAR</th> 
+			<th>FIXO</th> 
+			<th class="text-center">Ação</th> 
+		</tr> 
+		
+		<!-- Essa diretiva permite que o AngularJS repita a criação de um elemento de nossa página a partir dos dados de um array	 -->
+		<tr ng-repeat="contato in telefones | filter: filtro">  
+			<td> 
+				<a>>{{contato.celular}}</a> 
+			</td> 
+			<td>{{contato.fixo}}</td> 
+			<td class="text-center"> 
+				<button ng-click="remove(contato)" class="btn btn-warning"> 
+					Remover 
+				</button> 
+			</td> 
+		</tr> 
+	</table> 
+</div>
